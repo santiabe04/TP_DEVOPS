@@ -1,4 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
+import swaggerUi from "swagger-ui-express";
+import { openapi } from "./docs/openapi";
 
 interface Item {
   id: number;
@@ -12,7 +14,7 @@ const app = express();
 app.use(express.json());
 
 
-// API ROUTES AND METHODS
+// API ENDPOINTS
 
 // HEALTH (GET)
 app.get("/api/health", (_req: Request, res: Response) => {
@@ -56,6 +58,15 @@ app.delete("/api/items/:id", (req: Request, res: Response) => {
   }
   res.status(204).send();
 });
+
+
+// DOCS
+
+app.get("/api/docs.json", (_req: Request, res: Response) => {
+  res.json(openapi);
+});
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(openapi));
+
 
 // 404
 app.use((_req: Request, res: Response) => {
