@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/santiabe04/TP_DEVOPS/compare/v1.1.0...v1.2.0) (2026-10-19)
+
+
+### Features
+
+* add swagger docs ([02513c3](https://github.com/santiabe04/TP_DEVOPS/commit/02513c386b22103914a56adad27d7604055ca643))
+
 ## [1.1.0](https://github.com/santiabe04/TP_DEVOPS/compare/v1.0.0...v1.1.0) (2026-10-19)
 
 
