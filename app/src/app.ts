@@ -1,6 +1,8 @@
 import express, { NextFunction, Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";
 import { openapi } from "./docs/openapi";
+import pinoHttp from "pino-http";
+import { logger } from "./logger";
 
 interface Item {
   id: number;
@@ -12,6 +14,29 @@ let nextId = 1;
 
 const app = express();
 app.use(express.json());
+
+// LOGGER
+app.use(
+  pinoHttp({
+    logger,
+    serializers: {
+      req: () => undefined,
+      res: () => undefined,
+    },
+    customProps: (req, res) => ({
+      method: req.method,
+      path: (req as Request).originalUrl.split("?")[0],
+      status_code: res.statusCode,
+    }),
+    customLogLevel: (_req, res, err) => {
+      if (err || res.statusCode >= 500) return "error";
+      if (res.statusCode >= 400) return "warn";
+      return "info";
+    },
+    customSuccessMessage: () => "Request completed",
+    customErrorMessage: () => "Request failed",
+  })
+);
 
 
 // API ENDPOINTS
@@ -74,8 +99,8 @@ app.use((_req: Request, res: Response) => {
 });
 
 // ERROR HANDLER
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  console.error(err.message);
+app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
+  req.log.error({ err }, "Unhandled error");
   res.status(500).json({ error: "Error interno del servidor" });
 });
 
