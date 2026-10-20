@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/santiabe04/TP_DEVOPS/compare/v1.2.0...v1.3.0) (2026-10-20)
+
+
+### Features
+
+* add structured json logging ([c760f70](https://github.com/santiabe04/TP_DEVOPS/commit/c760f70ac7ac6bd817772aa5dc445da3edb6cdbc))
+
 ## [1.2.0](https://github.com/santiabe04/TP_DEVOPS/compare/v1.1.0...v1.2.0) (2026-10-19)
 
 
