@@ -66,6 +66,19 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+  deploy:
+    needs: [release-please, docker-publish]
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy on Render
+        env:
+          HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          IMAGE: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/app:${{ needs.release-please.outputs.version }}
+        run: |
+          curl --fail --silent --show-error \
+            "${HOOK_URL}&imgURL=${IMAGE}"
+
   cleanup-branch:
     needs: [release-please, docker-publish]
     if: ${{ needs.release-please.outputs.release_created == 'true' }}
