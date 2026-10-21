@@ -56,6 +56,10 @@ describe("rutas incorrectas", () => {
     const res = await request(app).get("/api/no-existe");
     expect(res.status).toBe(404);
   });
+  it("ruta de error devuelve 500", async () => {
+    const res = await request(app).get("/api/error");
+    expect(res.status).toBe(500);
+  });
 });
 
 describe("documentación", () => {
