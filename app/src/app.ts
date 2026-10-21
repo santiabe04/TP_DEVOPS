@@ -103,6 +103,11 @@ app.get("/api/docs.json", (_req: Request, res: Response) => {
 });
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(openapi));
 
+// ERROR (GET) -- Error on purpose
+app.get("/api/error", (_req: Request, res: Response) => {
+  res.status(500).json({ error: "El error está errando" });
+});
+
 
 // 404
 app.use((_req: Request, res: Response) => {
