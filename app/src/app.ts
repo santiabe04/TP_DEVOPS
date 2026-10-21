@@ -3,6 +3,7 @@ import swaggerUi from "swagger-ui-express";
 import { openapi } from "./docs/openapi";
 import pinoHttp from "pino-http";
 import { logger } from "./logger";
+import { httpMetrics } from "./metrics";
 
 interface Item {
   id: number;
@@ -15,6 +16,9 @@ let nextId = 1;
 const app = express();
 app.use(express.json());
 
+// METRICS
+app.use(httpMetrics);
+
 // LOGGER
 app.use(
   pinoHttp({
@@ -23,7 +27,14 @@ app.use(
       req: () => undefined,
       res: () => undefined,
     },
-    customProps: (req, res) => ({
+    customSuccessObject: (req, res, val) => ({
+      ...val,
+      method: req.method,
+      path: (req as Request).originalUrl.split("?")[0],
+      status_code: res.statusCode,
+    }),
+    customErrorObject: (req, res, _err, val) => ({
+      ...val,
       method: req.method,
       path: (req as Request).originalUrl.split("?")[0],
       status_code: res.statusCode,
