@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/santiabe04/TP_DEVOPS/compare/v1.5.0...v1.6.0) (2026-10-21)
+
+
+### Features
+
+* add error api endpoint ([8a9fc67](https://github.com/santiabe04/TP_DEVOPS/commit/8a9fc677daa5560d4b45878dca8f88e9ec6df2bb))
+
 ## [1.5.0](https://github.com/santiabe04/TP_DEVOPS/compare/v1.4.0...v1.5.0) (2026-10-21)
 
 
