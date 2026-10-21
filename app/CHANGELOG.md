@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/santiabe04/TP_DEVOPS/compare/v1.4.0...v1.5.0) (2026-10-21)
+
+
+### Features
+
+* add otlp http metrics with export to grafana cloud ([7b7cf43](https://github.com/santiabe04/TP_DEVOPS/commit/7b7cf43bf46c234e8c2bd86bcae552c7d6b8057e))
+
 ## [1.4.0](https://github.com/santiabe04/TP_DEVOPS/compare/v1.3.0...v1.4.0) (2026-10-20)
 
 
